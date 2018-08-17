@@ -1,4 +1,4 @@
-package com.moviecraze.store.service;
+package com.moviecraze.store.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

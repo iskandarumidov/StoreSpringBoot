@@ -1,3 +1,4 @@
+package com.moviecraze.store.repository;
 //package com.moviecraze.store.service;
 //
 //import javax.persistence.EntityManager;

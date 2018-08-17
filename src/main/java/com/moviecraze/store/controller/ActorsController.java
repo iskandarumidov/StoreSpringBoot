@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.moviecraze.store.entity.Actor;
 //import com.moviecraze.store.entity.ActorMovieIdsOnly;
 import com.moviecraze.store.jsonviews.Views;
-import com.moviecraze.store.service.ActorRepository;
+import com.moviecraze.store.repository.ActorRepository;
 
 @RestController
 @RequestMapping("/api/v1/actors")

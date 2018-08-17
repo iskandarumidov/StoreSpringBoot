@@ -1,10 +1,12 @@
 package com.moviecraze.store.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -16,8 +18,9 @@ public class Genre {
 	private String name;
 	private String description;
 	
-//	@JsonBackReference
-	private List<Movie> movies;
+	@OneToMany(mappedBy = "genre")
+	private Set<ActorMovieGenreLink> actorMovieGenreLinks;
+
 	
 	protected Genre() {
 		
