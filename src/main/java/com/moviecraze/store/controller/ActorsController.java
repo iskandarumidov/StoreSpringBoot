@@ -21,6 +21,7 @@ public class ActorsController {
 	private ActorRepository actorService;
 	
 	@GetMapping
+	@JsonView(Views.HideMovieActors.class)
 //	@JsonView(Views.ActorHideMoviePojos.class)
 	public List<Actor> getAllActors(){
 		List<Actor> actors =  actorService.findAll();

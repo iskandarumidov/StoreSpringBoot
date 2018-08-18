@@ -12,17 +12,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moviecraze.store.jsonviews.Views;
 
 @Entity
 public class Movie {
 	@Id
 	@GeneratedValue
+//	@JsonView(Views.HideMovieActors.class)
 	private long id;
 	
+//	@JsonView(Views.HideMovieActors.class)
 	private String name;
+	
 	@Temporal(TemporalType.DATE)
+//	@JsonView(Views.HideMovieActors.class)
 	private Date releaseDate;
+//	@JsonView(Views.HideMovieActors.class)
 	private int budget;
 //	@JsonManagedReference
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
@@ -31,15 +39,17 @@ public class Movie {
 //            inverseJoinColumns = { @JoinColumn(name = "actor_id") })
 //	private Set<Actor> actors;
 	
-	
+//	@JsonIgnore
 	@OneToMany(mappedBy = "movie")
 	private Set<ActorMovieGenreLink> actorMovieGenreLinks;
 
 	
 	
-	
+//	@JsonView(Views.HideMovieActors.class)
 	private String country;
+//	@JsonView(Views.HideMovieActors.class)
 	private String ageRating;
+//	@JsonView(Views.HideMovieActors.class)
 	private int lengthInMinutes;
 	
 	
@@ -59,6 +69,8 @@ public class Movie {
 //	}	
 	
 	@JsonProperty
+//	@JsonView(Views.ShowMovieActors.class)
+	@JsonView(Views.HideMovieActors.class)
 	public List<Actor> getActors() {
 		
 		if(actorMovieGenreLinks.size() == 0) {
@@ -73,6 +85,7 @@ public class Movie {
 	}	
 	
 	@JsonProperty
+//	@JsonView(Views.HideMovieActors.class)
 	public List<Genre> getGenres() {
 		
 		if(actorMovieGenreLinks.size() == 0) {
@@ -85,8 +98,6 @@ public class Movie {
 			return genreList;
 		}
 	}	
-	
-	
 	
 	
 	protected Movie() {
@@ -173,6 +184,4 @@ public class Movie {
 		return "Movie [id=" + id + ", name=" + name + ", country=" + country + ", lengthInMinutes=" + lengthInMinutes
 				+ "]";
 	}
-	
-	
 }

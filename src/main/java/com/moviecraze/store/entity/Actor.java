@@ -13,15 +13,23 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moviecraze.store.jsonviews.Views;
 
 @Entity
 public class Actor {
 	@Id
 	@GeneratedValue
+//	@JsonView(Views.HideMovieActors.class)
 	private long id;
 	
+//	@JsonView(Views.HideMovieActors.class)
 	private String firstName;
+	
+//	@JsonView(Views.HideMovieActors.class)
 	private String lastName;
+	
+//	@JsonView(Views.HideMovieActors.class)
 	private Date dateOfBirth;
 //	@ManyToMany(mappedBy = "actors")
 //	@JsonBackReference
@@ -41,19 +49,20 @@ public class Actor {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-//	@JsonProperty
-//	public List<Long> getParentId() {
-//		
-//		if(movies.size() == 0) {
-//			return null;
-//		}else {
-//			List<Long> idList= new ArrayList<>();
-//			for(Movie movie : movies) {
-//				idList.add(movie.getId());
-//			}
-//			return idList;
-//		}
-//	}	
+	@JsonProperty
+//	@JsonView(Views.HideMovieActors.class)
+	public List<Movie> getMovies() {
+		
+		if(actorMovieGenreLinks.size() == 0) {
+			return null;
+		}else {
+			List<Movie> movies= new ArrayList<>();
+			for(ActorMovieGenreLink link : actorMovieGenreLinks) {
+				movies.add(link.getMovie());
+			}
+			return movies;
+		}
+	}	
 	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
